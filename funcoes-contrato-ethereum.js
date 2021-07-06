@@ -3,21 +3,21 @@ async function getRentalContractData() {
     const userInput = contractNumberField.value * 1;
     alert("valorInformadoPeloUsuario: " + userInput);
     try {
-      const arrayRentalData = await smartContract.rentals(userInput);
-      console.log(arrayRentalData);
+      const arrayDonationData = await smartContract.donation(userInput);
+      console.log(arrayDonationData);
       //Modo mais verboso
-      let showLocator = document.getElementById("locator");
-      showLocator.innerText = arrayRentalData[0];
+      let showDoador = document.getElementById("doador");
+      showDoador.innerText = arrayDonationData[0];
       //Modo sintetico onde se concatena um comando junto a outro na mesma linha
-      document.getElementById("renter").innerText = arrayRentalData[1];
-      document.getElementById("addressHome").innerText = arrayRentalData[2];
-      document.getElementById("rentalValue").innerText = arrayRentalData[3];
+      document.getElementById("donation").innerText = arrayDonationData[1];
+      document.getElementById("addressdoacao").innerText = arrayDonationData[2];
+      document.getElementById("donationValue").innerText = arrayDonationData[3];
     } catch (err) {
       console.error(err);
-      document.getElementById("locator").innerText = "";
-      document.getElementById("renter").innerText = "";
-      document.getElementById("addressHome").innerText = "";
-      document.getElementById("rentalValue").innerText = "";
+      document.getElementById("doador").innerText = "";
+      document.getElementById("donatario").innerText = "";
+      document.getElementById("addressdoacao").innerText = "";
+      document.getElementById("donationValue").innerText = "";
       contractNumberField.value = 0;
       alert("Houve um erro ao buscar o contrato de numero: " + userInput);
     }
@@ -38,11 +38,11 @@ async function getRentalContractData() {
     try {
       var tx;
       var txReceipt;
-      tx = await smartContractWithSigner.registerRental(
-        document.frmImovel.paramLocator.value,
-        document.frmImovel.paramRenter.value,
-        document.frmImovel.paramAddressHome.value,
-        document.frmImovel.paramRentalValue.value
+      tx = await smartContractWithSigner.registerDonation(
+        document.frmImovel.paramDoador.value,
+        document.frmImovel.paramDonatario.value,
+        document.frmImovel.paramAddressDoacao.value,
+        document.frmImovel.paramDonationValue.value
       );
       console.log("transacao enviada ao metamask. pendente...", tx);
       alert("Transação enviada... " + tx.hash + " aguarde a confirmação da Blockcnain...");
